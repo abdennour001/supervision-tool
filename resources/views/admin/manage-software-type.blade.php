@@ -11,19 +11,25 @@
                 </div>
             </h2>
         </div>
-        <div class="ui two column centered grid">
-            <div class="four column centered row">
+        <div class="row mt-md-3 justify-content-center">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="d-flex">
+                        <div>
+                            <label for="type" class="mt-2 mx-4" style="font-size: medium;">Type software</label>
+                        </div>
+                        <div>
+                            <input id="type" class="form-control" type="text" name="softwareType" placeholder="Type software">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
                 <div class="ui buttons">
-                    <button class="ui green button">
+                    <button class="ui green button form-control">
                         <i class="plus icon"></i> Ajouter un type software
                     </button>
                 </div>
-            </div>
-        </div>
-        <div class="ui middle aligned center aligned grid form">
-            <div class="inline field">
-                <label>Type software</label>
-                <input type="text" name="softwareType" placeholder="Type software">
             </div>
         </div>
         <br>
@@ -39,7 +45,6 @@
                 <td data-label="TypeSoftware">HP Openview</td>
                 <td data-label="Supprimer">
                     <button class="ui red button">
-                        <i class="window close icon"></i>
                         Supprimer
                     </button>
                     <button class="ui primary button">
@@ -52,7 +57,6 @@
                 <td data-label="TypeSoftware">HP Openview</td>
                 <td data-label="Supprimer">
                     <button class="ui red button">
-                        <i class="window close icon"></i>
                         Supprimer
                     </button>
                     <button class="ui primary button">
@@ -65,7 +69,6 @@
                 <td data-label="TypeSoftware">HP Openview</td>
                 <td data-label="Supprimer">
                     <button class="ui red button">
-                        <i class="window close icon"></i>
                         Supprimer
                     </button>
                     <button class="ui primary button">

@@ -69,3 +69,8 @@ Route::get('/manager/{item}', function($item) {
 Route::post('/admin/external-support-management/add', 'Admin\SupportsController@store')->name('support.add')->middleware('auth');
 // Delete a support.
 Route::delete('/admin/support/{id}', 'Admin\SupportsController@destroy')->middleware('auth')->name('admin.support.destroy');
+
+// Add new type hardware.
+Route::post('/admin/manage-hardware/add', 'Admin\HardwareController@store')->name('admin.hardware.type-hardware.add')->middleware('auth');
+// Delete a type hardware.
+Route::delete('/admin/hardware/type-hardware/{id}', 'Admin\HardwareController@destroy')->middleware('auth')->name('admin.hardware.type-hardware.destroy');

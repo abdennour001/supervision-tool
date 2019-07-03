@@ -103,9 +103,11 @@
                 jconfirm({
                     title: 'Confirmation!',
                     content: 'Êtes-vous sûr de supprimer ce profil?',
+                    type: 'red',
+                    typeAnimated: true,
                     buttons: {
                         confirm: {
-                            btnClass: 'btn-blue',
+                            btnClass: 'btn-red',
                             action : function () {
                                 $this.off('submit').submit();
                             }
@@ -123,11 +125,12 @@
                 jconfirm({
                     title: 'Profil supprimé',
                     content: msg,
-
+                    type: 'green',
+                    typeAnimated: true,
                     buttons: {
                         ok: {
                             text: 'Continuer',
-                            btnClass: 'btn-blue',
+                            btnClass: 'btn-green',
                             keys: ['enter', 'shift'],
                             action: function(){
                                 return true;
@@ -144,11 +147,12 @@
                 jconfirm({
                     title: 'Profil Modifié',
                     content: msg_update,
-
+                    type: 'green',
+                    typeAnimated: true,
                     buttons: {
                         ok: {
                             text: 'Continuer',
-                            btnClass: 'btn-blue',
+                            btnClass: 'btn-green',
                             keys: ['enter', 'shift'],
                             action: function(){
                                 return true;

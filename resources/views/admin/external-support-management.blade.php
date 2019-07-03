@@ -152,53 +152,59 @@
 
     <script type="text/javascript">
 
-        // Hide the message div after 10 seconds.
-        setTimeout(function(){
-            $("#message").hide();
-        },10000);
+        $(document).ready(function () {
 
-        $('.delete').on("click", function (event) {
+            // Hide the message div after 10 seconds.
+            setTimeout(function () {
+                $("#message").hide();
+            }, 10000);
 
-            let $this = $(this);    // reference to the current scope
+            $('.delete').on("click", function (event) {
 
-            jconfirm({
-                title: 'Confirmation!',
-                content: 'Êtes-vous sûr de supprimer ce support?',
-                buttons: {
-                    confirm: {
-                        btnClass: 'btn-blue',
-                        action : function () {
-                            $this.off('submit').submit();
-                        }
-                    },
-                    cancel: function () {
-                    },
-                }
+                let $this = $(this);    // reference to the current scope
+
+                jconfirm({
+                    icon: 'glyphicon glyphicon-heart',
+                    title: 'Confirmation!',
+                    content: 'Êtes-vous sûr de supprimer ce support?',
+                    type: 'red',
+                    typeAnimated: true,
+                    buttons: {
+                        confirm: {
+                            btnClass: 'btn-red',
+                            action: function () {
+                                $this.off('submit').submit();
+                            }
+                        },
+                        cancel: function () {
+                        },
+                    }
+                });
+                return false;
             });
-            return false;
-        });
 
-        let msg = '{{Session::get('delete_message')}}';
-        let exist = '{{Session::has('delete_message')}}';
-        if(exist){
-            jconfirm({
-                title: 'Support supprimé',
-                content: msg,
-
-                buttons: {
-                    ok: {
-                        text: 'Continuer',
-                        btnClass: 'btn-blue',
-                        keys: ['enter', 'shift'],
-                        action: function(){
-                            return true;
+            let msg = '{{Session::get('delete_message')}}';
+            let exist = '{{Session::has('delete_message')}}';
+            if (exist) {
+                jconfirm({
+                    title: 'Support supprimé',
+                    content: msg,
+                    type: 'green',
+                    typeAnimated: true,
+                    buttons: {
+                        ok: {
+                            text: 'Continuer',
+                            btnClass: 'btn-green',
+                            keys: ['enter', 'shift'],
+                            action: function () {
+                                return true;
+                            }
                         }
                     }
-                }
 
-            });
-        }
-
+                });
+            }
+        });
     </script>
 
 @endsection
