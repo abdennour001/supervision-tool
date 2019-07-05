@@ -12,9 +12,11 @@
     </div>
 
     <div class="ui centered grid" style="padding: 5%;">
+
         <div class="container row justify-content-center">
             @include('messages.errors')
         </div>
+
         <form class="ui form" method="post" action="{{ route('login') }}">
             @csrf
             <div class="field">

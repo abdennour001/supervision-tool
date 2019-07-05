@@ -9,6 +9,8 @@ class TypeHardware extends Model
     protected $table = 'type_hardware';
     protected $primaryKey='id_type_hardware';
 
+    protected $fillable = ['libelle_type_hardware'];
+
     /*
      * Get hardware marques.
      */

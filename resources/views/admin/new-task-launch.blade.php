@@ -5,7 +5,7 @@
     <div class="pusher">
         <div class="ui middle aligned center aligned grid padd">
             <h2 class="ui icon header">
-                <i class="red sticky note icon"></i>
+                <i class="green sticky note icon"></i>
                 <div class="content">
                     Lancer une nouvelle tâche
                 </div>
@@ -30,7 +30,7 @@
                     <label>Appartient à un projet?</label>
                     <div class="field">
                         <div class="ui radio checkbox">
-                            <input type="radio" name="projet" value="oui">
+                            <input type="radio" name="projet" value="oui" checked>
                             <label>Oui</label>
                         </div>
                     </div>

@@ -9,6 +9,8 @@ class MarqueHardware extends Model
     protected $table='marque_hardware';
     protected $primaryKey='id_marque_hardware';
 
+    protected $fillable=['constructeur', 'reference'];
+
     /*
      * Get the hardware type.
      */

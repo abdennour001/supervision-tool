@@ -9,6 +9,8 @@ class TypeSoftware extends Model
     protected $table='type_software';
     protected $primaryKey='id_type_software';
 
+    protected $fillable = ['libelle_type_software'];
+
     /*
      * Get softwares.
      */

@@ -45,15 +45,19 @@
                             <strong>{{ $errors->first('numero_telephone') }}</strong>
                         </div>
                     @endif
-                    <button type="submit" class="ui green button form-check mt-md-3">
+                    <button type="submit" class="btn btn-primary form-check mt-md-3">
                         Modifier
                     </button>
+
+                    <a id="annuler" href="{{ url()->previous() }}" class="btn btn-danger form-check mt-md-3">
+                        Annuler
+                    </a>
                 </div>
             </form>
-
         </div>
 
     </div>
+
 
 
 @endsection('content-admin')

@@ -70,7 +70,30 @@ Route::post('/admin/external-support-management/add', 'Admin\SupportsController@
 // Delete a support.
 Route::delete('/admin/support/{id}', 'Admin\SupportsController@destroy')->middleware('auth')->name('admin.support.destroy');
 
+
 // Add new type hardware.
-Route::post('/admin/manage-hardware/add', 'Admin\HardwareController@store')->name('admin.hardware.type-hardware.add')->middleware('auth');
+Route::post('/admin/manage-hardware/add', 'Admin\HardwareController@storeType')->name('admin.hardware.type-hardware.add')->middleware('auth');
+// Add new type hardware.
+Route::post('/admin/manage-hardware/add-marque', 'Admin\HardwareController@storeMArque')->name('admin.hardware.marque-hardware.add')->middleware('auth');
 // Delete a type hardware.
-Route::delete('/admin/hardware/type-hardware/{id}', 'Admin\HardwareController@destroy')->middleware('auth')->name('admin.hardware.type-hardware.destroy');
+Route::delete('/admin/hardware/type-hardware/{id}', 'Admin\HardwareController@destroyType')->middleware('auth')->name('admin.hardware.type-hardware.destroy');
+// Delete a marque hardware.
+Route::post('/admin/hardware/marque-hardware/{id}', 'Admin\HardwareController@destroyMarque')->middleware('auth')->name('admin.hardware.marque-hardware.destroy');
+// Search for marque
+Route::get('/admin/hardware/marque-hardware/search', 'Admin\HardwareController@action')->name('admin.hardware.marque-hardware.search');
+
+
+// Add new type software.
+Route::post('/admin/manage-software-type/add', 'Admin\SoftwareController@storeType')->name('admin.software.type-software.add')->middleware('auth');
+// Delete a type software.
+Route::delete('/admin/software/type-software/{id}', 'Admin\SoftwareController@destroyType')->middleware('auth')->name('admin.software.type-software.destroy');
+// Update a type software.
+Route::put('/admin/software/type-software/update/{id}', 'Admin\SoftwareController@updateType')->middleware('auth')->name('admin.software.type-software.update');
+
+
+// Add new software.
+Route::post('/admin/manage-software/add', 'Admin\SoftwareController@storeSoftware')->name('admin.software.add')->middleware('auth');
+// Delete a software.
+Route::delete('/admin/software/{id}', 'Admin\SoftwareController@destroySoftware')->middleware('auth')->name('admin.software.destroy');
+// Update a type software.
+Route::put('/admin/software/update/{id}', 'Admin\SoftwareController@updateSoftware')->middleware('auth')->name('admin.software.update');

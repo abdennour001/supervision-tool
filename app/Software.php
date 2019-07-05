@@ -9,6 +9,8 @@ class Software extends Model
     protected $table='software';
     protected $primaryKey='id_software';
 
+    protected $fillable=['nom_software'];
+
     /*
      * Get server.
      */
