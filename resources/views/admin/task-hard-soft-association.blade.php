@@ -2,82 +2,198 @@
 
 @section('content-admin')
 
+    <div class="cover" style="background-color:black; width:100%; height:200%; display:none; position:absolute; top:0; left:0; z-index: 1000;"></div>
+
     <div class="pusher">
         <div class="ui middle aligned center aligned grid">
             <h2 class="ui icon header">
-                <i class="red puzzle piece icon"></i>
+                <i class="green puzzle piece icon"></i>
                 <div class="content">
-                    Liste des familles de types de tâches
+                    Associer hardware-software à un type de tâche
                 </div>
             </h2>
         </div>
-        <div class="ui middle aligned center aligned grid">
-            <h2 class="ui icon header">
-                <div class="content">
-                    <h4>Type tâche : Troublshooting</h4>
-                </div>
-            </h2>
-        </div>
-        <div class="ui middle aligned center aligned grid form">
-            <div class="inline field">
-                <label>Seuil (minutes)</label>
-                <input type="range" name="SeuilIn" id="SeuilInput" min="0" max="120" oninput="SeuilOutput.value = SeuilInput.value">
-                <output for="Seuil" name="SeuilOut" id="SeuilOutput">24</output>
-            </div>
-        </div>
-        <div class="ui two column centered grid">
-            <div class="four column centered row">
-                <div class="ui buttons">
-                    <div class="ui right floated green button">
-                        <i class="plus icon"></i> Ajouter un type tâche
-                    </div>
-                    <div class="ui right floated primary button">
-                        <i class="pencil alternate icon"></i> Renomer
-                    </div>
+        <div class="form">
+            <div class="ui middle aligned center aligned grid form my-md-4">
+                <div class="inline field">
+                    <label style="font-size: large; font-weight: normal;">Type tâche</label>
+                    <select id="searchDropdown" class="ui fluid dropdown form-control" name="famille">
+                        @foreach(\App\TypeTache::all() as $type)
+                            <option value="{{ $type->id_type_tache }}">{{ $type->libelle_type_tache }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
         </div>
-        <br>
-        <h4>Types de hardware associé</h4>
-        <table class="ui red table">
-            <thead>
-            <tr>
-                <th>Nom hardware</th>
-                <th>Supprimer</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td data-label="TaskType">Serveur</td>
-                <td data-label="Supprimer">
-                    <button class="ui red button">
-                        <i class="window close icon"></i>
-                        Supprimer
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <h4>Types de software associé</h4>
-        <table class="ui red table">
-            <thead>
-            <tr>
-                <th>Nom software</th>
-                <th>Supprimer</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td data-label="TaskType">Syslog</td>
-                <td data-label="Supprimer">
-                    <button class="ui red button">
-                        <i class="window close icon"></i>
-                        Supprimer
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+
+        @if($message = \Illuminate\Support\Facades\Session::get('add_message'))
+            <div class="row justify-content-center" id="message">
+                <div class="alert alert-success">
+                    <strong>{{ $message }}</strong>
+                </div>
+            </div>
+        @endif
+
+        @if($message = \Illuminate\Support\Facades\Session::get('delete_message'))
+            <div class="row justify-content-center" id="message2">
+                <div class="alert alert-danger">
+                    <strong>{{ $message }}</strong>
+                </div>
+            </div>
+        @endif
+
+        <div class="include"></div>
     </div>
+
+    <script>
+
+        $(document).ready(function () {
+            $('.supprimer').on('click', function() {
+                let $this = $(this);    // reference to the current scope
+
+                jconfirm({
+                    title: 'Confirmation!',
+                    content: 'Êtes-vous sûr de supprimer cet élement?',
+                    type: 'red',
+                    typeAnimated: true,
+                    icon:'glyphicon glyphicon-exclamation-sign',
+                    buttons: {
+                        confirm: {
+                            btnClass: 'btn-red',
+                            action : function () {
+                                $this.off('submit').submit();
+                            }
+                        },
+                        cancel: function () {
+                        },
+                    }
+                });
+                return false;
+            });
+
+
+            fetch_type_tache_info($('#searchDropdown').val());
+
+            $('#searchDropdown').change(function() {
+                fetch_type_tache_info($('#searchDropdown').val());
+            });
+
+            // ajax search function
+            function fetch_type_tache_info(query = '') {
+                $.ajax({
+                    url:"{{ route('admin.manage-task.search-type-tache') }}",
+                    method: 'GET',
+                    data: {query:query},
+                    dataType: 'text',
+                    success:function(data) {
+                        $(".include").html(data);
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert("Status: " + textStatus);
+                        alert("Error: " + errorThrown);
+                    }
+                })
+            }
+
+            function getPage(url, query) {
+                $.ajax({
+                    url : url,
+                    data: {query: query},
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert("Status: " + textStatus);
+                        alert("Error: " + errorThrown);
+                    }
+                }).done(function (data) {
+                    $('.include').html(data);
+                })
+            }
+
+            // Override the pagination
+            $('body').on('click', '.pagination a', function(e) {
+                e.preventDefault();
+
+                let url = $(this).attr('href');
+                getPage(url, $('#searchDropdown').val());
+                window.history.pushState("", "", "");
+            });
+
+            $('body').on('click', '.modify', function () {
+                window.location.replace("new-task-type");
+            });
+
+            let dropdown = $('.dropdown');
+
+            $('.include').on('show.bs.dropdown', dropdown, function () {
+                let $this = $(this);    // reference to the current scope
+                $this.children('div.dropdown-menu').fadeIn(500);
+                $(".cover").fadeTo(500, 0.5);
+            });
+
+            $('.include').on('hide.bs.dropdown', dropdown, function () {
+                let $this = $(this);    // reference to the current scope
+                $this.children('div.dropdown-menu').fadeOut(500);
+                $(".cover").fadeOut(500);
+            });
+
+            // Hide the message div after 10 seconds.
+            setTimeout(function(){
+                $("#message").hide();
+            },10000);
+
+            // Hide the message div after 10 seconds.
+            setTimeout(function(){
+                $("#message2").hide();
+            },10000);
+
+            $('body').on('click', '.supprimer', function () {
+                let $this = $(this);    // reference to the current scope
+
+                jconfirm({
+                    title: 'Confirmation!',
+                    content: 'Êtes-vous sûr de supprimer?',
+                    type: 'red',
+                    typeAnimated: true,
+                    icon:'glyphicon glyphicon-exclamation-sign',
+                    buttons: {
+                        confirm: {
+                            btnClass: 'btn-red',
+                            action : function () {
+                                $this.off('submit').submit();
+                            }
+                        },
+                        cancel: function () {
+                        },
+                    }
+                });
+                return false;
+            });
+
+
+            let msg = '{{Session::get('warning_message')}}';
+            let exist = '{{Session::has('warning_message')}}';
+            if(exist){
+                jconfirm({
+                    title: 'Type existé déja',
+                    content: msg,
+                    type: 'red',
+                    typeAnimated: true,
+                    icon:'glyphicon glyphicon-exclamation-sign',
+                    buttons: {
+                        ok: {
+                            text: 'Continuer',
+                            btnClass: 'btn-red',
+                            keys: ['enter', 'shift'],
+                            action: function(){
+                                return true;
+                            }
+                        }
+                    }
+
+                });
+            }
+
+        })
+
+    </script>
 
 @endsection

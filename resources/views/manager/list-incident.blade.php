@@ -13,6 +13,27 @@
         </div>
 
         <div class="ui middle aligned center aligned grid form">
+            <div class="field">
+                <label>Description</label>
+                <input type="text" name="description" placeholder="Description">
+            </div>
+            <div class="field">
+                <label>Séverité</label>
+                <select class="ui fluid dropdown">
+                    <option value="Critique">Critique</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="ui two column centered grid">
+            <div class="four column centered row">
+                <div class="ui buttons">
+                    <button class="ui red button">Signaler</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui middle aligned center aligned grid form">
             <div class="inline field">
                 <select class="ui fluid dropdown">
                     <option value="resolu">resolu</option>
@@ -26,59 +47,20 @@
         <table class="ui green table">
             <thead>
             <tr>
-                <th>
-                    <h4>Incident n°1</h4>
-                </th>
+                <th>Incident</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Etat</th>
+                <th>Sévérité</th>
+                <th>Cause</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td>
-                    <p class="nobr">Description : <span> Incident 1</span></p>
-                    <p class="nobr">Signalé le : <span> 22/5/2019 11:23:33</span></p>
-                    <p class="nobr">Etat : <span> Non résolu</span></p>
-                    <p>Sévérité : <span> Critique</span></p>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-        <table class="ui green table">
-            <thead>
-            <tr>
-                <th>
-                    <h4>Incident n°2</h4>
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <p class="nobr">Description : <span> Incident 2</span></p>
-                    <p class="nobr">Signalé le : <span> 22/5/2019 11:23:33</span></p>
-                    <p class="nobr">Etat : <span> Non résolu</span></p>
-                    <p>Sévérité : <span> Critique</span></p>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-        <table class="ui green table">
-            <thead>
-            <tr>
-                <th>
-                    <h4>Incident n°3</h4>
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <p class="nobr">Description : <span> Incident 3</span></p>
-                    <p class="nobr">Signalé le : <span> 22/5/2019 11:23:33</span></p>
-                    <p class="nobr">Etat : <span> Non résolu</span></p>
-                    <p>Sévérité : <span> Critique</span></p>
-                </td>
+                <td>1</td>
+                <td>22/5/2019 11:23:33</td>
+                <td>Non résolu</td>
+                <td>Critique</td>
             </tr>
             </tbody>
         </table>

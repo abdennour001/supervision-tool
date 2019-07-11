@@ -24,10 +24,10 @@ class TypeTache extends Model
     }
 
     public function typesHardware() {
-        return $this->belongsToMany('App\TypeHardware');
+        return $this->belongsToMany('App\TypeHardware', 'type_hardware_type_tache', 'id_type_tache', 'id_type_hardware');
     }
 
     public function typesSoftware() {
-        return $this->belongsToMany('App\TypeSoftware');
+        return $this->belongsToMany('App\TypeSoftware', 'type_software_type_tache', 'id_type_tache', 'id_type_software');
     }
 }

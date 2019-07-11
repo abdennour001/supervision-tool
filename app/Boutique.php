@@ -9,10 +9,12 @@ class Boutique extends Model
     protected $table='boutique';
     protected $primaryKey='id_boutique';
 
+    protected $fillable = ['nom_boutique', 'address_boutique', 'id_hardware'];
+
     /*
      * Get hardware.
      */
     public function hardware() {
-        return $this->hasMany('App/Hardware', 'id_hardware', 'id_hardware');
+        return $this->belongsTo('App\Hardware', 'id_hardware', 'id_hardware');
     }
 }

@@ -8,10 +8,18 @@
             <b>Outil de supervision</b>
         </h2>
 
-        <div class='font-weight-bold text-xl-center text-white'>Engineer</div>
-        <div class='font-weight-bold text-xl-center text-white-50'>{{ \Illuminate\Support\Facades\Session::get('profil')->nom . " " . \Illuminate\Support\Facades\Session::get('profil')->prenom }}</div>
-        <div class='text-xl-center text-white-50'><strong><</strong>{{ \Illuminate\Support\Facades\Session::get('profil')->login_compte }}<strong>></strong></div>
-
+        <div class="row">
+            <div class="col-12 text-center pb-2">
+                <div class='font-weight-bold text-xl-center text-white'>Ingénieur</div>
+            </div>
+            <div class="col-12 input-position text-center pb-2">
+                <img src="{{ \Illuminate\Support\Facades\Session::get('profil')->url_photo }}" class="rounded-circle w-20" style="margin: 0 auto; display: block; max-width: 30%; height: auto;">
+            </div>
+            <div class="col-12">
+                <div class='font-weight-bold text-xl-center text-white-50'>{{ \Illuminate\Support\Facades\Session::get('profil')->nom . " " . \Illuminate\Support\Facades\Session::get('profil')->prenom }}</div>
+                <div class='text-xl-center text-white-50'><strong><</strong>{{ \Illuminate\Support\Facades\Session::get('profil')->login_compte }}<strong>></strong></div>
+            </div>
+        </div>
 
         <div class="item">
             <div class="header">

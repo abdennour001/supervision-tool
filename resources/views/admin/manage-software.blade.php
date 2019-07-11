@@ -225,7 +225,7 @@
             let exist = '{{Session::has('delete_message')}}';
             if(exist){
                 jconfirm({
-                    title: 'Type hardware supprimé',
+                    title: 'Type software supprimé',
                     content: msg,
                     type: 'green',
                     typeAnimated: true,

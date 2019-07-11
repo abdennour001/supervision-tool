@@ -93,5 +93,6 @@
     <orderEntry type="library" name="jquery-confirm" level="application" />
     <orderEntry type="library" name="semantic" level="application" />
     <orderEntry type="library" name="jquery-3.4.1" level="application" />
+    <orderEntry type="library" name="jquery.cookie" level="application" />
   </component>
 </module>

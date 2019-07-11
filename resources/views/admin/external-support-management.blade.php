@@ -164,7 +164,7 @@
                 let $this = $(this);    // reference to the current scope
 
                 jconfirm({
-                    icon: 'glyphicon glyphicon-heart',
+                    icon: 'glyphicon glyphicon-question-sign',
                     title: 'Confirmation!',
                     content: 'Êtes-vous sûr de supprimer ce support?',
                     type: 'red',

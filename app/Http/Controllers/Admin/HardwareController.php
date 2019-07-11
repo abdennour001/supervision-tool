@@ -48,7 +48,6 @@ class HardwareController extends Controller
         $marqueHardware->save();
 
         return back()->with('add_message', 'Vous avez ajouté "' . $userData['constructeur'] .'" correctement.');
-
     }
 
     public function destroyType($idTypeHardware) {

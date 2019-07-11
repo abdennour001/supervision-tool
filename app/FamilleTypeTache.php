@@ -10,6 +10,8 @@ class FamilleTypeTache extends Model
     protected $table = 'famille_type_tache';
     protected $primaryKey='id_famille_type_tache';
 
+    protected $fillable = ["libelle_famille_type_tache"];
+
     /*
      * Get the type_taches.
      */

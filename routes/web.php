@@ -70,6 +70,12 @@ Route::post('/admin/external-support-management/add', 'Admin\SupportsController@
 // Delete a support.
 Route::delete('/admin/support/{id}', 'Admin\SupportsController@destroy')->middleware('auth')->name('admin.support.destroy');
 
+// Add new support.
+Route::post('/manager/external-support-management/add', 'Admin\SupportsController@store')->name('support.add')->middleware('auth');
+// Delete a support.
+Route::delete('/manager/support/{id}', 'Admin\SupportsController@destroy')->middleware('auth')->name('admin.support.destroy');
+
+
 
 // Add new type hardware.
 Route::post('/admin/manage-hardware/add', 'Admin\HardwareController@storeType')->name('admin.hardware.type-hardware.add')->middleware('auth');
@@ -81,6 +87,17 @@ Route::delete('/admin/hardware/type-hardware/{id}', 'Admin\HardwareController@de
 Route::post('/admin/hardware/marque-hardware/{id}', 'Admin\HardwareController@destroyMarque')->middleware('auth')->name('admin.hardware.marque-hardware.destroy');
 // Search for marque
 Route::get('/admin/hardware/marque-hardware/search', 'Admin\HardwareController@action')->name('admin.hardware.marque-hardware.search');
+
+// Add new type hardware.
+Route::post('/manager/manage-hardware/add', 'Admin\HardwareController@storeType')->name('admin.hardware.type-hardware.add')->middleware('auth');
+// Add new type hardware.
+Route::post('/manager/manage-hardware/add-marque', 'Admin\HardwareController@storeMArque')->name('admin.hardware.marque-hardware.add')->middleware('auth');
+// Delete a type hardware.
+Route::delete('/manager/hardware/type-hardware/{id}', 'Admin\HardwareController@destroyType')->middleware('auth')->name('admin.hardware.type-hardware.destroy');
+// Delete a marque hardware.
+Route::post('/manager/hardware/marque-hardware/{id}', 'Admin\HardwareController@destroyMarque')->middleware('auth')->name('admin.hardware.marque-hardware.destroy');
+// Search for marque
+Route::get('/manager/hardware/marque-hardware/search', 'Admin\HardwareController@action')->name('admin.hardware.marque-hardware.search');
 
 
 // Add new type software.
@@ -97,3 +114,50 @@ Route::post('/admin/manage-software/add', 'Admin\SoftwareController@storeSoftwar
 Route::delete('/admin/software/{id}', 'Admin\SoftwareController@destroySoftware')->middleware('auth')->name('admin.software.destroy');
 // Update a type software.
 Route::put('/admin/software/update/{id}', 'Admin\SoftwareController@updateSoftware')->middleware('auth')->name('admin.software.update');
+
+// Add new software.
+Route::post('/manager/manage-software/add', 'Admin\SoftwareController@storeSoftware')->name('admin.software.add')->middleware('auth');
+// Delete a software.
+Route::delete('/manager/software/{id}', 'Admin\SoftwareController@destroySoftware')->middleware('auth')->name('admin.software.destroy');
+// Update a type software.
+Route::put('/manager/software/update/{id}', 'Admin\SoftwareController@updateSoftware')->middleware('auth')->name('admin.software.update');
+
+
+// New type tâche
+Route::post('/admin/manage-task/add-type-tache', 'Admin\TacheController@storeTypeTache')->name('admin.manage-task.add-type-tache')->middleware('auth');
+// Delete type tâche
+Route::delete('/admin/manage-task/delete-type-tache/{id}', 'Admin\TacheController@deleteTypeTache')->name('admin.manage-task.delete-type-tache')->middleware('auth');
+// Update type tâche
+Route::put('/admin/manage-task/update-type-tache/{id}', 'Admin\TacheController@updateTypeTache')->name('admin.manage-task.update-type-tache')->middleware('auth');
+// Search for type tache
+Route::get('/admin/manage-task/search-type-tache', 'Admin\TacheController@searchTypeTache')->name('admin.manage-task.search-type-tache')->middleware('auth');
+
+// Associate Hardware
+Route::post('/admin/manage-task/associate-hardware/{id}', 'Admin\TacheController@associateHardware')->name('admin.manage-task.associate-hardware');
+// Associate Software
+Route::post('/admin/manage-task/associate-software/{id}', 'Admin\TacheController@associateSoftware')->name('admin.manage-task.associate-software');
+// Disassociate Hardware
+Route::delete('/admin/manage-task/disassociate-hardware/{id_type_tache}&{id_type_hardware}', 'Admin\TacheController@disassociateHardware')->name('admin.manage-task.disassociate-hardware');
+// Disassociate Software
+Route::delete('/admin/manage-task/disassociate-software/{id_type_tache}&{id_type_software}', 'Admin\TacheController@disassociateSoftware')->name('admin.manage-task.disassociate-software');
+
+
+// New famille type tâche
+Route::post('/admin/manage-task/add-famille-type-tache', 'Admin\TacheController@storeFamille')->name('admin.manage-task.add-famille-type-tache')->middleware('auth');
+// Delete famille type tâche
+Route::delete('/admin/manage-task/delete-famille-type-tache/{id}', 'Admin\TacheController@deleteFamille')->name('admin.manage-task.delete-famille-type-tache')->middleware('auth');
+// Update famille type tâche
+Route::put('/admin/manage-task/update-famille-type-tache/{id}', 'Admin\TacheController@updateFamille')->name('admin.manage-task.update-famille-type-tache')->middleware('auth');
+
+// Add new Boutique
+Route::post('/manager/list-boutique/store', 'Manager\BoutiqueController@storeBoutique')->name('manager.list-boutique.store')->middleware('auth');
+// Delete Boutique
+Route::delete('/manager/list-boutique/delete/{id_boutique}', 'Manager\BoutiqueController@deleteBoutique')->name('manager.list-boutique.delete')->middleware('auth');
+// Update Boutique
+Route::put('/manager/list-boutique/update/{id_boutique}', 'Manager\BoutiqueController@updateBoutique')->name('manager.list-boutique.update')->middleware('auth');
+
+
+// Search for type tache for a famille type tache
+Route::get('/manager/manage-task/search-type-tache', 'Manager\TacheController@searchTypeTache')->name('manager.manage-task.search-type-tache')->middleware('auth');
+// Create a new TacheIT
+Route::post('/manager/manage-task/add-tache-it', 'Manager\TacheController@storeTacheIT')->name('manager.manage-task.add-tache-it');

@@ -17,7 +17,7 @@ class CreateBoutiqueTable extends Migration
             $table->bigIncrements('id_boutique');
             $table->string('nom_boutique');
             $table->mediumText('address_boutique');
-            $table->unsignedBigInteger('id_hardware');
+            $table->unsignedBigInteger('id_hardware')->nullable();
 
             $table->foreign('id_hardware')->references('id_hardware')->on('hardware');
             $table->timestamps();

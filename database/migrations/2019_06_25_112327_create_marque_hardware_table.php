@@ -17,7 +17,7 @@ class CreateMarqueHardwareTable extends Migration
             $table->bigIncrements('id_marque_hardware');
             $table->string('reference');
             $table->string('constructeur');
-            $table->string('url_img');
+            $table->string('url_img')->nullable();
             $table->unsignedBigInteger('id_type_hardware');
 
             $table->foreign('id_type_hardware')->references('id_type_hardware')->on('type_hardware');

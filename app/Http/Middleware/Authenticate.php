@@ -15,7 +15,7 @@ class Authenticate extends Middleware
             return redirect('/login');
         } else {
             $profil = Session::get('profil');
-            if ($profil->login_compte[0] == $request->getRequestUri()[1])
+            if ($profil->login_compte[0] == $request->getRequestUri()[1] || ($profil->login_compte[0] == 'i' && $request->getRequestUri()[1] == 'e'))
             {
                 return $next($request);
             }

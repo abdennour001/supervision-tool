@@ -15,11 +15,11 @@ class CreateHardwareTable extends Migration
     {
         Schema::create('hardware', function (Blueprint $table) {
             $table->bigIncrements('id_hardware');
-            $table->string('hostname');
+            $table->string('hostname')->nullable();
             $table->ipAddress('snmpaddr');
-            $table->mediumText('snmp_sysdescr');
-            $table->string('etat_hardware');
-            $table->unsignedBigInteger('id_marque_hardware');
+            $table->mediumText('snmp_sysdescr')->nullable();
+            $table->string('etat_hardware')->nullable();
+            $table->unsignedBigInteger('id_marque_hardware')->nullable();
 
             $table->foreign('id_marque_hardware')->references('id_marque_hardware')
                 ->on('marque_hardware');

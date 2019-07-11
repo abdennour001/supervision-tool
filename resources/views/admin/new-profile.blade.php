@@ -29,7 +29,7 @@
                         <div class="field">
                             <label for="nom" class="col-form-label">Nom</label>
 
-                            <input class="form-control"
+                            <input id='nom_input' class="form-control"
                                    type="text"
                                    name="nom"
                                    placeholder="Nom"
@@ -45,7 +45,7 @@
                         </div>
                         <div class="field">
                             <label for="prenom" class="col-form-label">Prénom</label>
-                            <input type="text"
+                            <input id='prenom_input' type="text"
                                    class="form-control"
                                    name="prenom"
                                    placeholder="Prénom"
@@ -108,7 +108,7 @@
                         </div>
                         <div class="field">
                             <label for="role" class="col-form-label">Rôle</label>
-                            <select class="ui fluid dropdown form-control">
+                            <select id="role_select" class="ui fluid dropdown form-control">
                                 <option value="ing">Ingénieur</option>
                                 <option value="man">Manager</option>
                                 <option value="admin">Administrateur</option>
@@ -123,12 +123,13 @@
                         </div>
                         <div class="field">
                             <label for="login_compte" class="col-form-label">Login</label>
-                            <input type="text"
-                                   name="login_compte"
-                                   class="form-control"
-                                   value="{{ old('login_compte') }}"
-                                   placeholder="Login"
-                                   autofocus>
+                            <input  id="login_input"
+                                    type="text"
+                                    name="login_compte"
+                                    class="form-control"
+                                    value="{{ old('login_compte') }}"
+                                    placeholder="Login"
+                                    autofocus>
 
                             @if($errors->has('login_compte'))
                                 <div class=" text-md-left text-danger" role="alert">
@@ -170,10 +171,40 @@
 
     <script type="text/javascript">
 
-        // Hide the message div after 10 seconds.
-        setTimeout(function(){
-            $("#message").hide();
-        },10000);
+        $(document).ready(function() {
+            let login_compte = {'role' : '', 'first_letter_nom' : '', 'prenom' : ''};
+            let login_compte_input = $('#login_input');
+
+            function make_login() {
+                return login_compte['role'] +  login_compte['first_letter_nom'] + '_' + login_compte['prenom'];
+            }
+
+            // Hide the message div after 10 seconds.
+            setTimeout(function(){
+                $("#message").hide();
+            },10000);
+
+            let role = $('#role_select');
+            login_compte['role'] = role.val()[0];
+            login_compte_input.val(make_login());
+
+            role.on('change', function() {
+                login_compte['role'] = role.val()[0];
+                login_compte_input.val(make_login());
+            });
+
+            let nom = $('#nom_input');
+            nom.change(function () {
+                nom.val() === '' ? login_compte['first_letter_nom'] = '' : login_compte['first_letter_nom'] = nom.val()[0];
+                login_compte_input.val(make_login());
+            });
+
+            let prenom = $('#prenom_input');
+            prenom.change(function () {
+                login_compte['prenom'] = prenom.val();
+                login_compte_input.val(make_login());
+            });
+        });
 
     </script>
 

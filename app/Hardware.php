@@ -9,6 +9,8 @@ class Hardware extends Model
     protected $table='hardware';
     protected $primaryKey='id_hardware';
 
+    protected $fillable = ['snmpaddr'];
+
     /*
      * Get the marque of this hardware.
      */
@@ -27,7 +29,7 @@ class Hardware extends Model
      * Get the Boutique.
      */
     public function boutique() {
-        return $this->belongsTo('App\Boutique', 'id_hardware');
+        return $this->hasOne('App\Boutique', 'id_hardware');
     }
 
     /*
