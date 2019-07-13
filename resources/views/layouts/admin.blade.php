@@ -67,7 +67,7 @@
         </div>
         <div class="item">
             <div class="header">
-                <a class="item" href="{{ route('logout') }}">
+                <a id="logout" class="item" href="{{ route('logout') }}">
                     Déconnexion
                 </a>
             </div>
@@ -100,9 +100,18 @@
                 document.cookie = "offsetY=" + $("#sidebar").scrollTop().toString() + ";path=/" ;
             }
 
+            let aig=false;
+
             $(window).on('unload', function () {
-                saveScroll();
+                if(!aig) {
+                    saveScroll();
+                }
             });
+
+            $('#logout').on('click', function () {
+                aig=true;
+                document.cookie = "offsetY=" + "0" + ";path=/" ;
+            })
         });
     </script>
 

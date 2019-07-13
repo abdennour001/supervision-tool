@@ -9,6 +9,8 @@ class Incident extends Model
     protected $table='incident';
     protected $primaryKey='id_incident';
 
+    protected $fillable=['descriptif_incident', 'date_incident', 'etat_incident', 'severite'];
+
     /*
      * Get software.
      */

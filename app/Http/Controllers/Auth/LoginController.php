@@ -39,7 +39,7 @@ class LoginController extends Controller
             if (preg_match("/^a/", $profil->login_compte)) {
                 return redirect()->route('admin', ['item' => 'new-profile']);
             } elseif (preg_match("/^m/", $profil->login_compte)) {
-                return redirect()->route('manager', ['item' => 'new-task-launch']);
+                return redirect()->route('manager', ['item' => 'new-project']);
             } elseif (preg_match("/^i/", $profil->login_compte)) {
                 return redirect()->route('engineer', ['item' => 'new-task-launch']);
             }
@@ -70,7 +70,7 @@ class LoginController extends Controller
                 if (preg_match("/^a/", $result->login_compte)) {
                     return redirect()->route('admin', ['item' => 'new-profile']);
                 } elseif (preg_match("/^m/", $result->login_compte)) {
-                    return redirect()->route('manager', ['item' => 'new-task-launch']);
+                    return redirect()->route('manager', ['item' => 'new-project']);
                 } elseif (preg_match("/^i/", $result->login_compte)) {
                     return redirect()->route('engineer', ['item' => 'new-task-launch']);
                 }

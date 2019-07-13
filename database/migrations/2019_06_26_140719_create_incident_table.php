@@ -16,11 +16,11 @@ class CreateIncidentTable extends Migration
         Schema::create('incident', function (Blueprint $table) {
             $table->bigIncrements('id_incident');
             $table->mediumText('descriptif_incident');
-            $table->date('date_incident');
+            $table->dateTime('date_incident');
             $table->tinyInteger('etat_incident');
             $table->tinyInteger('severite');
-            $table->unsignedBigInteger('id_software_cause');
-            $table->unsignedBigInteger('id_hardware_cause');
+            $table->unsignedBigInteger('id_software_cause')->nullable();
+            $table->unsignedBigInteger('id_hardware_cause')->nullable();
 
             $table->foreign('id_software_cause')->references('id_software')->on('software');
             $table->foreign('id_hardware_cause')->references('id_hardware')->on('hardware');

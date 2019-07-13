@@ -71,9 +71,9 @@ Route::post('/admin/external-support-management/add', 'Admin\SupportsController@
 Route::delete('/admin/support/{id}', 'Admin\SupportsController@destroy')->middleware('auth')->name('admin.support.destroy');
 
 // Add new support.
-Route::post('/manager/external-support-management/add', 'Admin\SupportsController@store')->name('support.add')->middleware('auth');
+Route::post('/manager/external-support-management/add', 'Admin\SupportsController@store')->name('manager.support.add')->middleware('auth');
 // Delete a support.
-Route::delete('/manager/support/{id}', 'Admin\SupportsController@destroy')->middleware('auth')->name('admin.support.destroy');
+Route::delete('/manager/support/{id}', 'Admin\SupportsController@destroy')->middleware('auth')->name('manager.support.destroy');
 
 
 
@@ -161,3 +161,19 @@ Route::put('/manager/list-boutique/update/{id_boutique}', 'Manager\BoutiqueContr
 Route::get('/manager/manage-task/search-type-tache', 'Manager\TacheController@searchTypeTache')->name('manager.manage-task.search-type-tache')->middleware('auth');
 // Create a new TacheIT
 Route::post('/manager/manage-task/add-tache-it', 'Manager\TacheController@storeTacheIT')->name('manager.manage-task.add-tache-it');
+
+// Create new incident
+Route::post('/manager/list-incident/store', 'Manager\IncidentController@store')->name('manager.list-incident.store')->middleware('auth');
+// Delete an incident
+Route::delete('/manager/list-incident/delete/{id}', 'Manager\IncidentController@delete')->name('manager.list-incident.delete')->middleware('auth');
+// Update incident
+Route::put('/manager/list-incident/update/{id}', 'Manager\IncidentController@update')->name('manager.list-incident.update')->middleware('auth');
+// Search for incident by état
+Route::get('/manager/list-incident/search', 'Manager\IncidentController@search')->middleware('auth')->name('manager.list-incident.search');
+
+// Add new project
+Route::post('/manager/new-project/store', 'Manager\ProjectController@store')->name('manager.project.store')->middleware('auth');
+// Delete a project
+Route::delete('/manager/list-project/delete/{id}', 'Manager\ProjectController@delete')->name('manager.project.delete')->middleware('auth');
+// Update a project
+Route::get('/manager/list-project/update/{id}', 'Manager\ProjectController@update')->name('manager.project.update')->middleware('auth');

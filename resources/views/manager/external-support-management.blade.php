@@ -24,7 +24,7 @@
                     </div>
                 @endif
 
-                <form class="ui form" action="{{ route('support.add') }}" method="post">
+                    <form class="ui form" action="{{ route('manager.support.add') }}" method="post">
                     @csrf
                     <div class="ui grid">
                         <div class="eight wide column">
@@ -126,7 +126,7 @@
                             <td>{{ $support->mail_support }}</td>
                             <td data-label="Supprimer">
 
-                                <form class="form-group delete" action="{{ route('admin.support.destroy', $support->id) }}" method="post">
+                                <form class="form-group delete" action="{{ route('manager.support.destroy', $support->id) }}" method="post">
                                     {{ csrf_field() }}
                                     @method('DELETE')
 
@@ -206,4 +206,5 @@
             }
         });
     </script>
+
 @endsection
