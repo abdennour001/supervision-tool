@@ -189,3 +189,5 @@ Route::get('manager/list-project/search', 'Manager\ProjectController@search')->n
 // Get all etapes of a project Ajax method
 Route::get('manager/list-project/etape/search', 'Manager\ProjectController@searchEtapes')->name('manager.project.etape.search')->middleware('auth');
 Route::get('manager/list-project/tache/search', 'Manager\ProjectController@searchTaches')->name('manager.project.tache.search')->middleware('auth');
+Route::get('manager/hardware/use/search', 'Manager\HardwareController@search')->name('manager.hardware.use.search')->middleware('auth');
+Route::get('manager/software/use/search', 'Manager\SoftwareController@search')->name('manager.software.use.search')->middleware('auth');

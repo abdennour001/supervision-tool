@@ -19,6 +19,6 @@ class TypeSoftware extends Model
     }
 
     public function typesTache() {
-        return $this->belongsToMany('App\TypeTache');
+        return $this->belongsToMany('App\TypeTache', 'type_software_type_tache', 'id_type_software', 'id_type_tache');
     }
 }

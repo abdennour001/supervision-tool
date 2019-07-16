@@ -14,132 +14,55 @@
                 </h2>
             </div>
         </div>
-        <div class="ui middle aligned center aligned grid padd">
 
+        <div class="col-md-6 my-md-4">
+            <div class="row">
+                <div class="col-md-6 offset-2">
+                    <label style="font-size: medium;">Rechecher par type hardware</label>
+                </div>
+                <div class="col-md-push-4">
+                    <select id="searchDropdown" class="ui fluid dropdown">
+                        @foreach($typesHardware = \App\TypeHardware::all()->sortByDesc('created_at')
+                            as $typeHardware)
+                            <option value="{{ $typeHardware->id_type_hardware }}">
+                                {{ $typeHardware->libelle_type_hardware }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
         </div>
 
-        <table class="ui green table">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Hardware</th>
-                <th>Ingénieur</th>
-                <th>Date d'utilisation</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td data-label="number" class="collapsing">
-                    1
-                </td>
-                <td data-label="hardware" class="collapsing">
-                    <div>
-                        Switch
-                    </div>
-                </td>
-                <td data-label="ingenieur" class="collapsing">
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                </td>
-                <td data-label="date utilisation" class="collapsing">
-                    <div>
-                        25/2/2019
-                    </div>
-                    <div>
-                        23/2/2019
-                    </div>
-                    <div>
-                        24/2/2019
-                    </div>
-                    <div>
-                        25/2/2019
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td data-label="number" class="collapsing">2</td>
-                <td data-label="hardware" class="collapsing">
-                    <div>
-                        Switch
-                    </div>
-                </td>
-                <td data-label="ingenieur" class="collapsing">
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                </td>
-                <td data-label="date utilisation" class="collapsing">
-                    <div>
-                        25/2/2019
-                    </div>
-                    <div>
-                        23/2/2019
-                    </div>
-                    <div>
-                        24/2/2019
-                    </div>
-                    <div>
-                        25/2/2019
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td data-label="number" class="collapsing">3</td>
-                <td data-label="hardware" class="collapsing">
-                    <div>
-                        Switch
-                    </div>
-                </td>
-                <td data-label="ingenieur" class="collapsing">
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                </td>
-                <td data-label="date utilisation" class="collapsing">
-                    <div>
-                        25/2/2019
-                    </div>
-                    <div>
-                        23/2/2019
-                    </div>
-                    <div>
-                        24/2/2019
-                    </div>
-                    <div>
-                        25/2/2019
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="table col-md-10 offset-md-1 mb-md-4">
+
+        </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+            fetch_hardware_use($('#searchDropdown').val());
+
+            $('#searchDropdown').change(function() {
+                fetch_hardware_use($('#searchDropdown').val());
+            });
+
+            // ajax search function
+            function fetch_hardware_use(query = '') {
+                $.ajax({
+                    url:"{{ route('manager.hardware.use.search') }}",
+                    method: 'GET',
+                    data: {query:query},
+                    dataType: 'text',
+                    success:function(data) {
+                        $(".table").html(data);
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert("Status: " + textStatus);
+                        alert("Error: " + errorThrown);
+                    }
+                })
+            }
+        })
+    </script>
 
 @endsection
