@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="ui visible inverted left vertical sidebar menu pt-md-2">
+    <div id="sidebar" class="ui visible inverted left vertical sidebar menu pt-md-2">
         <h2 class="ui logo icon image text-center" style="color: white">
             <i class="map icon"></i>
             <b>Outil de supervision</b>
@@ -25,25 +25,8 @@
             <div class="header">
                 Gestion des tâches
             </div>
-            <a href="{{ url('/engineer',  ['item'=>'new-task-launch']) }}" class="item">
-                Nouvelle tâche
-            </a>
-            <a href="{{ url('/engineer',  ['item'=>'task-details']) }}" class="item">
-                Détails des tâches
-            </a>
             <a href="{{ url('/engineer',  ['item'=>'task-in-progress']) }}" class="item">
                 Tâches en cours
-            </a>
-        </div>
-        <div class="item">
-            <div class="header">
-                Projets
-            </div>
-            <a href="{{ url('/engineer',  ['item'=>'new-project']) }}" class="item">
-                Nouveau projet
-            </a>
-            <a href="{{ url('/engineer',  ['item'=>'project-in-progress']) }}" class="item">
-                Projets en cours
             </a>
         </div>
         <div class="item">
@@ -66,7 +49,7 @@
         </div>
         <div class="item">
             <div class="header">
-                <a class="item" href="{{ route('logout') }}">
+                <a id="logout" class="item" href="{{ route('logout') }}">
                     Déconnexion
                 </a>
             </div>
@@ -78,5 +61,40 @@
         @yield('content-engineer')
 
     </div>
+
+    <script>
+        $(document).ready(function() {
+
+            loadScroll();
+
+            function loadScroll() {
+                let cookies = document.cookie.split(';');
+                for (var cookie in cookies) {
+                    if (cookies[0].includes("offsetY")) {
+                        break;
+                    }
+                }
+                let offsetY = cookies[cookie].split('=')[1];
+                $("#sidebar").scrollTop(offsetY);
+            }
+
+            function saveScroll() {
+                document.cookie = "offsetY=" + $("#sidebar").scrollTop().toString() + ";path=/" ;
+            }
+
+            let aig=false;
+
+            $(window).on('unload', function () {
+                if(!aig) {
+                    saveScroll();
+                }
+            });
+
+            $('#logout').on('click', function () {
+                aig=true;
+                document.cookie = "offsetY=" + "0" + ";path=/" ;
+            })
+        });
+    </script>
 
 @endsection

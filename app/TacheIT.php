@@ -9,6 +9,8 @@ class TacheIT extends Model
     protected $table='tache_it';
     protected $primaryKey='id_tache';
 
+    protected $fillable=['date_affectation_tache', 'date_debut_tache', 'date_fin_tache', 'duree', 'etat'];
+
     /*
      * Get the type_tache.
      */

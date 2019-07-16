@@ -12,52 +12,54 @@
             </h2>
         </div>
 
-        <table class="ui blue table">
-            <thead>
-            <tr>
-                <th>
-                    <h4>Tâche n°1</h4>
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <p class="nobr">Type de tâche : <span>Ajout MIB</span></p>
-                    <p class="nobr">Etat de la tâche : <span> <i class="play blue icon"></i></span></p>
-                    <p class="nobr">Date de début : <span> 31/1/2018 12:22:33</span></p>
-                    <button class="ui blue button"><i class="pause icon"></i></button>
-                    <button class="ui green button"><i class="check icon"></i></button>
-                    <button class="ui red button"><i class="reply icon"></i></button>
-                    <button class="ui button"><i class="search icon"></i></button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-        <table class="ui blue table">
-            <thead>
-            <tr>
-                <th>
-                    <h4>Tâche n°2</h4>
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <p class="nobr">Type de tâche : <span>Ajout MIB</span></p>
-                    <p class="nobr">Etat de la tâche : <span> <i class="pause blue icon"></i></span></p>
-                    <p class="nobr">Date de début : <span> 31/1/2018 12:22:33</span></p>
-                    <button class="ui blue button"><i class="play icon"></i></button>
-                    <button class="ui green button"><i class="check icon"></i></button>
-                    <button class="ui red button"><i class="reply icon"></i></button>
-                    <button class="ui button"><i class="search icon"></i></button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="container mt-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table col-md-12 mb-md-4">
+                        <table class="ui green table">
+                            <thead>
+                            <tr>
+                                <th>Tache #</th>
+                                <th>Date affectation</th>
+                                <th>Date début</th>
+                                <th>Date fin</th>
+                                <th>Duree (heur)</th>
+                                <th>Etat</th>
+                                <th>Ingénieur</th>
+                                <th>Type</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($taches = \App\TacheIT::query()->where('id_ingenieur', \Illuminate\Support\Facades\Session::get('profil')->id_profil)->orderByDesc('created_at')->paginate(5) as $tache)
+                                <tr>
+                                    <td data-label="number">{{ $tache->id_tache }}</td>
+                                    <td data-label="project">{{ $tache->date_affectation_tache }}</td>
+                                    <td data-label="date debut">{{ $tache->date_debut_tache }}</td>
+                                    <td data-label="date fin">{{ $tache->date_fin_tache }}</td>
+                                    <td data-label="date fin">{{ $tache->duree}}</td>
+                                    <td data-label="date fin">@if($tache->etat == 0)
+                                            active
+                                        @elseif($tache->etat  == 1)
+                                            suspendue
+                                        @elseif($tache->etat  == 2)
+                                            finie
+                                        @elseif($tache->etat  == 3)
+                                            escaladée
+                                        @endif
+                                    </td>
+                                    <td data-label="date fin">{{ $tache->ingenieur->nom . ' ' . $tache->ingenieur->prenom }}</td>
+                                    <td data-label="date fin">{{ $tache->typeTache->libelle_type_tache }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        <div class="row justify-content-center">
+                            {{ $taches->links() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
-
 @endsection

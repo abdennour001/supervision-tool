@@ -4,7 +4,6 @@
             <div class="col-md-12 my-md-3">
                 <div class="row">
                     <div class="col-md-6" style="font-weight: normal; font-size: large; margin-top: 5px;">
-{{--                        Projet <i class="glyphicon glyphicon-arrow-right" style="color: rgb(33, 186, 69);"></i> étape <i class="glyphicon glyphicon-arrow-right" style="color: rgb(33, 186, 69);"></i> Tache--}}
                         Liste des projets
                     </div>
                 </div>
@@ -21,8 +20,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($projets = \App\ProjetIT::query()->orderByDesc('created_at')->get()
-                                 as $projet)
+                    @foreach($projets as $projet)
                         <tr>
                             <td data-label="number">{{ $projet->id_projet }}</td>
                             <td data-label="project">{{ $projet->nom_projet }}</td>
@@ -30,8 +28,8 @@
                             <td data-label="date fin">{{ $projet->date_fin_projet }}</td>
                             <td data-label="Supprimer">
                                 <div class="row flex-row justify-content-start">
-                                    <div>
-                                        <form class="supprimer" action="{{ route('manager.project.delete', $projet->id_projet) }}" method="post">
+                                    <div class="px-2">
+                                        <form class="supprimer delete" action="{{ route('manager.project.delete', $projet->id_projet) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger" type="submit">
@@ -40,22 +38,22 @@
                                             </button>
                                         </form>
                                     </div>
-                                    <div>
-                                        <div class="dropdown px-2">
-                                            <button class="btn btn-md btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="clipboard icon"></i> Modifier
-                                            </button>
-                                            <div class="dropdown-menu" style="width: 250px;">
-                                                <form class="px-4 py-3" method="post" action="{{ route("manager.project.update", $projet->id_projet) }}">
-                                                    @csrf
-                                                    @method('PUT')
+{{--                                    <div>--}}
+{{--                                        <div class="dropdown px-2">--}}
+{{--                                            <button class="btn btn-md btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                                                <i class="clipboard icon"></i> Modifier--}}
+{{--                                            </button>--}}
+{{--                                            <div class="dropdown-menu" style="width: 250px;">--}}
+{{--                                                <form class="px-4 py-3" method="post" action="{{ route("manager.project.update", $projet->id_projet) }}">--}}
+{{--                                                    @csrf--}}
+{{--                                                    @method('PUT')--}}
 
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
+{{--                                                </form>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                     <div>
-                                        <button class="btn btn-success" type="submit">
+                                        <button class="btn btn-success afficher" type="submit" project="{{ $projet->id_projet }}">
                                             <i class="glyphicon glyphicon-plus"></i>
                                             <strong>Afficher</strong>
                                         </button>

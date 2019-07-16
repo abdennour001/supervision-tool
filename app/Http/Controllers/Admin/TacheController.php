@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\FamilleTypeTache;
+use App\Ingenieur;
+use App\TacheIT;
 use App\TypeHardware;
 use App\TypeSoftware;
 use App\TypeTache;
@@ -144,4 +146,5 @@ class TacheController extends Controller
         $typeTache->typesSoftware()->detach($id_software);
         return back()->with('delete_message', 'Vous avez supprimé "' . $typeSoftware->libelle_type_software .'" correctement.');
     }
+
 }

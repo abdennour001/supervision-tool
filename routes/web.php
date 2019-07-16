@@ -160,7 +160,13 @@ Route::put('/manager/list-boutique/update/{id_boutique}', 'Manager\BoutiqueContr
 // Search for type tache for a famille type tache
 Route::get('/manager/manage-task/search-type-tache', 'Manager\TacheController@searchTypeTache')->name('manager.manage-task.search-type-tache')->middleware('auth');
 // Create a new TacheIT
-Route::post('/manager/manage-task/add-tache-it', 'Manager\TacheController@storeTacheIT')->name('manager.manage-task.add-tache-it');
+Route::post('/manager/manage-task/add-tache-it/{id}', 'Manager\TacheController@storeTacheIT')->name('manager.manage-task.add-tache-it');
+Route::delete('/manager/manage-task/destroy-tache-it/{id}', 'Manager\TacheController@destroyTacheIT')->name('manager.manage-task.destroy-tache-it');
+
+// Create Etape
+Route::post('/manager/manage-etape/store/{id}', 'Manager\EtapeController@store')->name('manager.manage-etape.store');
+Route::delete('/manager/manage-etape/destroy/{id}', 'Manager\EtapeController@destroy')->name('manager.manage-etape.destroy');
+
 
 // Create new incident
 Route::post('/manager/list-incident/store', 'Manager\IncidentController@store')->name('manager.list-incident.store')->middleware('auth');
@@ -175,5 +181,11 @@ Route::get('/manager/list-incident/search', 'Manager\IncidentController@search')
 Route::post('/manager/new-project/store', 'Manager\ProjectController@store')->name('manager.project.store')->middleware('auth');
 // Delete a project
 Route::delete('/manager/list-project/delete/{id}', 'Manager\ProjectController@delete')->name('manager.project.delete')->middleware('auth');
+Route::delete('/engineer/notification/delete/{id}', 'Engineer\NotificationController@delete')->name('engineer.notification.destroy')->middleware('auth');
 // Update a project
 Route::get('/manager/list-project/update/{id}', 'Manager\ProjectController@update')->name('manager.project.update')->middleware('auth');
+// Get all projects Ajax method
+Route::get('manager/list-project/search', 'Manager\ProjectController@search')->name('manager.project.search')->middleware('auth');
+// Get all etapes of a project Ajax method
+Route::get('manager/list-project/etape/search', 'Manager\ProjectController@searchEtapes')->name('manager.project.etape.search')->middleware('auth');
+Route::get('manager/list-project/tache/search', 'Manager\ProjectController@searchTaches')->name('manager.project.tache.search')->middleware('auth');

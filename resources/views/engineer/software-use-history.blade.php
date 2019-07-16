@@ -14,132 +14,40 @@
                 </h2>
             </div>
         </div>
-        <div class="ui middle aligned center aligned grid padd">
-
+        <div class="row my-md-3">
+            <div class="col-md-6 offset-md-3">
+                <table class="ui blue table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Software</th>
+                        <th>Date d'utilisation</th>
+                        <th>Tache #</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($taches = \App\TacheIT::query()->where('id_ingenieur', \Illuminate\Support\Facades\Session::get('profil')->id_profil)->orderByDesc('created_at')->paginate(5) as $tache)
+                        @foreach($softwareList = $tache->typeTache->typesSoftware as $software)
+                            <tr>
+                                <td data-label="number" class="collapsing">
+                                    {{ $software->id_type_software }}
+                                </td>
+                                <td data-label="software" class="collapsing">
+                                    <div>
+                                        {{ $software->libelle_type_software }}
+                                    </div>
+                                </td>
+                                <td data-label="date utilisation" class="collapsing">
+                                    {{ $tache->date_affectation_tache }}
+                                </td>
+                                <td>{{ $tache->id_tache }}</td>
+                            </tr>
+                        @endforeach
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
-
-        <table class="ui blue table">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Software </th>
-                <th>Ingénieur</th>
-                <th>Date d'utilisation</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td data-label="number" class="collapsing">
-                    1
-                </td>
-                <td data-label="hardware" class="collapsing">
-                    <div>
-                        HP Openview
-                    </div>
-                </td>
-                <td data-label="ingenieur" class="collapsing">
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                </td>
-                <td data-label="date utilisation" class="collapsing">
-                    <div>
-                        25/2/2019
-                    </div>
-                    <div>
-                        23/2/2019
-                    </div>
-                    <div>
-                        24/2/2019
-                    </div>
-                    <div>
-                        25/2/2019
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td data-label="number" class="collapsing">2</td>
-                <td data-label="hardware" class="collapsing">
-                    <div>
-                        HP Openview
-                    </div>
-                </td>
-                <td data-label="ingenieur" class="collapsing">
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                </td>
-                <td data-label="date utilisation" class="collapsing">
-                    <div>
-                        25/2/2019
-                    </div>
-                    <div>
-                        23/2/2019
-                    </div>
-                    <div>
-                        24/2/2019
-                    </div>
-                    <div>
-                        25/2/2019
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td data-label="number" class="collapsing">3</td>
-                <td data-label="hardware" class="collapsing">
-                    <div>
-                        HP Openview
-                    </div>
-                </td>
-                <td data-label="ingenieur" class="collapsing">
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                    <div>
-                        Nom Prénom
-                    </div>
-                </td>
-                <td data-label="date utilisation" class="collapsing">
-                    <div>
-                        25/2/2019
-                    </div>
-                    <div>
-                        23/2/2019
-                    </div>
-                    <div>
-                        24/2/2019
-                    </div>
-                    <div>
-                        25/2/2019
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
     </div>
 
 @endsection

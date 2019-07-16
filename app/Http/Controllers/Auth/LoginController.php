@@ -41,7 +41,7 @@ class LoginController extends Controller
             } elseif (preg_match("/^m/", $profil->login_compte)) {
                 return redirect()->route('manager', ['item' => 'new-project']);
             } elseif (preg_match("/^i/", $profil->login_compte)) {
-                return redirect()->route('engineer', ['item' => 'new-task-launch']);
+                return redirect()->route('engineer', ['item' => 'notification-details']);
             }
         } else {
             return view('auth.login');
@@ -72,7 +72,7 @@ class LoginController extends Controller
                 } elseif (preg_match("/^m/", $result->login_compte)) {
                     return redirect()->route('manager', ['item' => 'new-project']);
                 } elseif (preg_match("/^i/", $result->login_compte)) {
-                    return redirect()->route('engineer', ['item' => 'new-task-launch']);
+                    return redirect()->route('engineer', ['item' => 'notification-details']);
                 }
             } else {
                 return back()->with('error', 'Login informations non valide.');

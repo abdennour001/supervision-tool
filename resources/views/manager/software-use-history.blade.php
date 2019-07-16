@@ -14,9 +14,6 @@
                 </h2>
             </div>
         </div>
-        <div class="ui middle aligned center aligned grid padd">
-
-        </div>
 
         <table class="ui green table">
             <thead>

@@ -9,6 +9,8 @@ class Notification extends Model
     protected $table='notification';
     protected $primaryKey='id_notification';
 
+    protected $fillable=['date_notification', 'objet', 'contenu', 'urgence'];
+
     /*
      * Get the profil of the notification
      */

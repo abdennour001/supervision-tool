@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Manager;
 
+use App\Etape;
 use App\ProjetIT;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,10 +30,48 @@ class ProjectController extends Controller
     }
 
     public function delete(Request $request, $id) {
-
+        $pro = ProjetIT::findOrFail($id);
+        $pro->delete();
+        return back()->with('delete_message', 'Le Projet "' . $pro->nom_projet . '" a été supprimé avec succès.');
     }
 
     public function update(Request $request, $id) {
 
+    }
+
+    public function search(Request $request) {
+        if ($request->ajax()) {
+            $projects = ProjetIT::query()->orderByDesc('created_at')->get();
+            try {
+                return view('manager.table-projet-include', ['projets' => $projects])->render();
+            } catch (\Throwable $e) {
+                dd($e);
+            }
+        }
+        return null;
+    }
+
+    public function searchEtapes(Request $request) {
+        if ($request->ajax()) {
+            $project = ProjetIT::findOrFail($request['project']);
+            $etapes = $project->etapes;
+            try {
+                return view('manager.table-etape-include', ['project' => $project, 'etapes' => $etapes])->render();
+            } catch (\Throwable $e) {
+                dd($e);
+            }
+        }
+    }
+
+    public function searchTaches(Request $request) {
+        if ($request->ajax()) {
+            $etape = Etape::findOrFail($request['etape']);
+            $taches = $etape->taches;
+            try {
+                return view('manager.table-tache-include', ['etape' => $etape, 'taches' => $taches])->render();
+            } catch (\Throwable $e) {
+                dd($e);
+            }
+        }
     }
 }

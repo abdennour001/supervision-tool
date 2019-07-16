@@ -24,7 +24,7 @@ class IncidentController extends Controller
     public function store(Request $request) {
         $inc = new Incident();
         $inc->descriptif_incident = $request->get('description');
-        $inc->date_incident = Carbon::now()->toDateTimeString();;
+        $inc->date_incident = Carbon::now()->toDateTimeString();
         $inc->etat_incident = $request->get('etat');
         $inc->severite = $request->get('severite');
 
