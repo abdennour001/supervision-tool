@@ -59,7 +59,7 @@ class HardwareController extends Controller
     public function destroyMarque($idMarqueHardware) {
         $marqueHardware = MarqueHardware::findOrFail($idMarqueHardware);
         $marqueHardware->delete();
-        return back()->with('delete_marque_message', 'La Marque Hardware <' . $marqueHardware->constructeur . '> a été supprimé avec succès.');
+        return back()->with('delete_marque_message', 'La Marque Hardware "' . $marqueHardware->constructeur . '" a été supprimé avec succès.');
     }
 
     public function action(Request $request) {

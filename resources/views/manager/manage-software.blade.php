@@ -24,7 +24,7 @@
 
 
         <div class="container mt-md-3">
-            <form action="{{ route('admin.software.add') }}" method="post">
+            <form action="{{ route('manager.software.add') }}" method="post">
                 @csrf
                 <div class="ui middle aligned center aligned grid form">
                     <div class="field form-group">
@@ -80,7 +80,7 @@
                                 <td data-label="Supprimer">
                                     <div class="row flex-row justify-content-start">
                                         <div>
-                                            <form class="supprimer" action="{{ route('admin.software.destroy',$software->id_software) }}" method="post">
+                                            <form class="supprimer" action="{{ route('manager.software.destroy',$software->id_software) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger" type="submit">
@@ -95,7 +95,7 @@
                                                     <i class="clipboard icon"></i> Modifier
                                                 </button>
                                                 <div class="dropdown-menu" style="width: 250px;">
-                                                    <form class="px-4 py-3" method="post" action="{{ route("admin.software.update", $software->id_software) }}">
+                                                    <form class="px-4 py-3" method="post" action="{{ route("manager.software.update", $software->id_software) }}">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="form-group">

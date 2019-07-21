@@ -31,7 +31,7 @@
                             <i class="pencil square icon"></i> Nouvelle référence hardware
                         </button>
                         <div class="dropdown-menu">
-                            <form class="px-4 py-3" method="post" action="{{ route('admin.hardware.marque-hardware.add') }}">
+                            <form class="px-4 py-3" method="post" action="{{ route('manager.hardware.marque-hardware.add') }}">
                                 @csrf
                                 <div class="form-group">
                                     <label for="exampleDropdownFormEmail1" style="font-size: medium;" >Constructeur</label>
@@ -63,7 +63,7 @@
                             <i class="pencil square icon"></i> Nouveau type hardware
                         </button>
                         <div class="dropdown-menu">
-                            <form class="px-4 py-3" method="post" action="{{ route("admin.hardware.type-hardware.add") }}">
+                            <form class="px-4 py-3" method="post" action="{{ route("manager.hardware.type-hardware.add") }}">
                                 @csrf
                                 <div class="form-group">
                                     <label for="exampleDropdownFormEmail1" style="font-size: medium;">Libelle type hardware</label>
@@ -158,7 +158,7 @@
             // ajax search function
             function fetch_marque_hardware_data(query = '') {
                 $.ajax({
-                    url:"{{ route('admin.hardware.marque-hardware.search') }}",
+                    url:"{{ route('manager.hardware.marque-hardware.search') }}",
                     method: 'GET',
                     data: {query:query},
                     dataType: 'text',
